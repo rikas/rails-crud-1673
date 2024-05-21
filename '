@@ -1,0 +1,44 @@
+class RestaurantsController < ApplicationController
+  def index
+    @restaurants = Restaurant.all
+  end
+
+  # GET /restaurants/:id
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  # GET /restaurants/new
+  def new
+    @restaurant = Restaurant.new
+  end
+
+  # POST /restaurants
+  # params[:restaurnt] = { name:..., rating:..., address:...}
+  def create
+    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant.save
+
+    redirect_to restaurant_path(@restaurant)
+  end
+
+  # GET /restaurants/:id
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  # PATCH /restaurants/:id
+  def update
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.update(restaurant_params)
+
+    redirect_to restaurant_path(@restaurant)
+  end
+
+  private
+
+  # strong params
+  def restaurant_params
+    params.require(:restaurant).permit(:name, :address, :rating)
+  end
+end

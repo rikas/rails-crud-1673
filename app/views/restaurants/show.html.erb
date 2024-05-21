@@ -1,0 +1,6 @@
+<h1><%= @restaurant.name %>
+  <%= "⭐️" * @restaurant.rating %></h1>
+<p><%= @restaurant.address %></p>
+
+<%= link_to "Back", restaurants_path %>
+<%= link_to "Edit", edit_restaurant_path(@restaurant) %>
